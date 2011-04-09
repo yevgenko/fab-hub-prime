@@ -1,0 +1,4 @@
+A collection of Fabric commands for setting up remote repository workflow as inspired by Joe Maller's [a web-focused Git workflow][].
+
+
+[a web-focused Git workflow]: http://joemaller.com/990/a-web-focused-git-workflow/
