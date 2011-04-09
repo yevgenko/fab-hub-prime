@@ -15,7 +15,7 @@ if os.path.exists("README.rst"):
 else:
   long_description = "See http://github.com/yeevgen/fab-hub-prime/tree/master"
 
-install_requires = ['Fabric >=1.0.0', 'GitPython', 'argparse']
+install_requires = ['Fabric >=1.0.0', 'GitPython', 'argparse', 'jinja2']
 
 setup(
   name="fab-hub-prime",

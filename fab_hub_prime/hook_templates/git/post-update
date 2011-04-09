@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo
+echo "**** Pulling changes into Prime [Hub's post-update hook]"
+echo
+
+cd {{ SITE_DIR }} || exit
+unset GIT_DIR
+git pull hub master
+
+exec git-update-server-info
