@@ -7,5 +7,8 @@ def ssh_add_key(pub_key_file):
   with open(os.path.normpath(pub_key_file), 'rt') as f:
     ssh_key = f.read()
   run('mkdir -p .ssh')
-  run('umask 066 && touch .ssh/authorized_keys')
+  run('touch .ssh/authorized_keys')
   files.append('.ssh/authorized_keys', ssh_key)
+
+def set_umask(umask='022'):
+  files.append('.bash_profile', 'umask %s' % umask)
