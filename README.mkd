@@ -1,4 +1,33 @@
 A collection of Fabric commands for setting up remote repository workflow as inspired by Joe Maller's [a web-focused Git workflow][].
 
+## Release Note
+
+This is in an early planning/prototyping phase and git only so far...
+
+## Installation
+
+Clonse the repo and run following command: `python setup.py install`
+
+## Usage Example
+
+In your site project, create `fabfile.py`:
+
+    # my_project/fabfile.py
+    from fab_hub_prime import *
+
+    def my_site():
+      env.hosts = ['my_site@example.com']
+      env.conf = {}
+      env.conf['live'] = dict(
+        SITE_DIR = '/var/www/sites/default',
+        REPO_DIR = '/var/www/repos/default_hub.git',
+      )
+    my_site()
+
+Inint hub: `fab init_hub`  
+And init prime: `fab init_prime` (for non empty primes use `fab inti_prime:commit=True` and gitignore template)
+
+And now, whenever you need to deploy updates: `git push live master`, see [a web-focused Git workflow][] for further description of original workflow.
+
 
 [a web-focused Git workflow]: http://joemaller.com/990/a-web-focused-git-workflow/
