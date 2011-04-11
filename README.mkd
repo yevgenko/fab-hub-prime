@@ -21,6 +21,8 @@ In your site project, create `fabfile.py`:
       env.conf['live'] = dict(
         SITE_DIR = '/var/www/sites/default',
         REPO_DIR = '/var/www/repos/default_hub.git',
+        # path to templates dir, e.g. you can copy into local project
+        #TEMPLATE_DIR = os.path.split(__file__)[0],
       )
     my_site()
 

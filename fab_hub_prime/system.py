@@ -26,9 +26,8 @@ def hub_init(remote='live'):
   run('mkdir -p %s' % conf['REPO_DIR'])
   with cd(conf['REPO_DIR']):
     run('git --bare init')
-    #TODO: find template dir
     files.upload_template('hooks/post-update', 'hooks/post-update', conf, True,
-        template_dir=os.path.join(os.path.split(__file__)[0], 'templates/git'))
+        template_dir=os.path.join(_get_template_dir(conf), 'templates/git'))
     run('chmod +x hooks/post-update')
   local('git remote add %s ssh://%s%s' % (remote, env.host_string, conf['REPO_DIR']))
 
@@ -46,11 +45,15 @@ def prime_init(remote='live', commit=False):
     run('git init')
     run('git remote add hub %s' % conf['REPO_DIR'])
     if commit:
-      put(os.path.join(os.path.split(__file__)[0], 'templates/git/gitignore'), '.gitignore')
+      put(os.path.join(_get_template_dir(conf), 'templates/git/gitignore'), '.gitignore')
       run('git add .')
       run('git commit -m "first commit"')
       run('git push hub master')
-    #TODO: find template dir
     files.upload_template('hooks/post-commit', '.git/hooks/post-commit', conf, True,
-        template_dir=os.path.join(os.path.split(__file__)[0], 'templates/git'))
+        template_dir=os.path.join(_get_template_dir(conf), 'templates/git'))
     run('chmod +x .git/hooks/post-commit')
+
+def _get_template_dir(conf):
+  if conf.has_key('TEMPLATE_DIR'):
+    return conf['TEMPLATE_DIR']
+  return os.path.split(__file__)[0]
